@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block style %}
+<link href='{% static 'css/createblog.css' %}' type='text/css' rel='stylesheet'/>
+<link href='{% static 'css/markdownrendered.css' %}' type='text/css' rel='stylesheet'/>
+{% endblock style %}
+{% block title %}
+创建博客
+{% endblock title %}
+{% block content %}
+  <div id='create-new-blog'>
+    <div id='page-title'>
+       <h2>编辑博客</h2>
+       <div>
+        <div onclick='publishBlog()'>
+         发布
+         <img src='{% static 'imgs/publish.png' %}'/>
+        </div>
+        <div onclick='saveBlog()'>
+         暂存
+         <img src='{% static 'imgs/save.png' %}'/>
+        </div>
+        <div onclick='uploadImg()'>
+          上传图片
+          <img src='{% static 'imgs/img.png' %}'/>
+         </div>
+       </div>
+       <div id='blog-title'>
+       {% if blog_title %}
+         <input type="text" value="{{blog_title}}" placeholder="输入博客标题 ..." id="blog-title-input"/>
+       {% else %}
+         <input type="text" placeholder="输入博客标题 ..." id="blog-title-input"/>
+       {% endif %}
+       </div>
+    </div>
+    <div id='react-render-markdown-editor'>
+      <div id='markdown-editor-container'>
+      {% if blog_content %}
+        <textarea id='markdown-editor' value="{{blog_content}}" placeholder="在这里写下您的博客内容，请使用 markdown" warp='hard'>
+        {{blog_content}}
+        </textarea>
+      {% else %}
+        <textarea id='markdown-editor' placeholder="在这里写下您的博客内容，请使用 markdown" warp='hard'></textarea>
+      {% endif %}
+      </div>
+      <div id='markdown-preview-container'>
+        <div id="markdown-preview"></div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+{% block javascript %}
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+{# 以下引入markdown 解析器和编辑器来制作 markdown编辑预览组件的做法参考自 https://zhuanlan.zhihu.com/p/22974946#}
+<script src="https://cdn.bootcss.com/marked/0.7.0/marked.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="{% static 'js/createBlog.js' %}" type='text/javascript' defer></script>
+<script src="{% static 'js/api.js' %}" type="text/javascript"></script>
+{% endblock javascript %}

@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block style %}
+  <link href='{% static 'css/mypage.css' %}' type='text/css' rel='stylesheet'/>
+{% endblock style %}
+{% block title %}
+  {{username}}的个人主页
+{% endblock title %}
+{% block content %}
+  <div id='mypage-body'>
+    <div id='dashboard'>
+      <div id='user-profile'>
+        <div>
+          <img src="{% static avatar %}" id='user-avatar'/>
+          <div>{{username}}</div>
+          {% if sex == '男' %}
+            <div id='sex-img'>
+              <img src='{% static 'imgs/Male.png' %}'/>
+            </div>
+            {% else %}
+            <div id='sex-img'>
+              <img src='{% static 'imgs/FeMale.png' %}'/>
+            </div>
+          {% endif %}
+        </div>
+        <div id='lan-tag'>
+          {% for lan in program_lan %}
+            <span>{{lan}}</span>
+          {% endfor %}
+        </div>
+      </div>
+       <div id='edit'>
+        <a href="{% url 'blog:createblog' %}">
+          <div id='create-new-blog'>
+            <img src='{% static 'imgs/add.png' %}'/>
+            <div>创建博客</div>
+          </div>
+        </a>
+         <a id='logout' onclick="logout()" href="javascript:void(0)">
+            <img src='{% static 'imgs/log-out.png' %}'/>
+            <div>退出登录</div>
+          </a>
+      </div>
+      <div id='msg-not-read-container'>
+    
+      </div>
+      <div id='message'></div>
+      <div id='hot-blog'>
+        <div>我的博客热榜前三
+          <img src="{% static 'imgs/hot.png' %}"/>
+          <span onclick="showMorePubBlog()" id='more-my-pub-button'>更多</span>
+        </div>
+        <div id='my-blog-list'>
+
+        </div>
+      </div>
+      <div id='not-pub-blog'>
+        <div>
+          暂存区
+          <img src="{% static 'imgs/repos.png' %}"/>
+        </div>
+        <div id='my-blog-list-not-pub'>
+
+        </div>
+      </div>
+    </div>
+    <div id='content'>
+    
+    </div>
+  </div>
+{% endblock content %}
+{% block javascript %}
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src='{% static 'js/api.js' %}' type="text/javascript"></script>
+  <script src='{% static 'js/mypage.js' %}' type="text/javascript"></script>
+{% endblock javascript %}

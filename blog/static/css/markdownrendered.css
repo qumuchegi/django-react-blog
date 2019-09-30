@@ -1,0 +1,56 @@
+blockquote{
+  margin:.6rem;
+  padding: .3rem;
+  background-color: #eee;
+  border-radius: .2rem
+}
+table{
+  border: solid 1.4px #ddd;
+  margin: .6rem;
+  padding: .7rem;
+}
+table thead{
+  background-color: #eee;
+  text-align: center;
+}
+table tbody tr:nth-child(2n){
+  background-color: #eee
+}
+table tbody td{
+  border: dashed 1px #eef;
+  padding: .8rem
+}
+code{
+  color:rgba(255,169,91);
+  font-size: 1rem;
+  line-height: 1.4rem;
+}
+pre{
+  background-color: #333;
+  overflow: scroll;
+  padding:2%;
+  border-radius: 4px;
+  font-size: 1rem
+}
+.hljs-function{
+
+  color:rgba(65,125,242)
+}
+.hljs-keyword{
+  color:rgb(118,90,243)
+}
+.hljs-comment{
+  color: rgb(110,124,159)
+}
+.hljs-params{
+  color:rgb(148, 148, 40)
+}
+.hljs-built_in{
+  color:rgb(99, 99, 194)
+}
+.hljs-attr{
+  color:rgb(72,124,241)
+}
+.hljs-string{
+  color:rgb(121,173,27)
+}

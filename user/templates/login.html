@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block style %}
+<link href='{% static 'css/login.css' %}' type='text/css' rel='stylesheet'/>
+{% endblock style %}
+{% block title %}
+  用户登录
+{% endblock%}
+{% block content %}
+  <h1>登录</h1>
+  <div id='login-form-container'>
+    <form action='' method='POST'>
+    {% csrf_token %}
+    <table>
+    {% for field in  login_form%}
+    <tr class='field-item'>
+       <td class="tag">{{ field.label_tag }} </td>
+       <td class="input" >{{ field }}</td>
+       <td>{{ field.errors }}</td>
+    </tr>
+    {% endfor %}
+    </table>
+    <div id='buttons'>
+      <input type='submit' value='提交登录' id='login-submit'>
+      <a href="{% url 'user:register' %}">去注册</a>
+    </div>
+    </form>
+  </div>
+{% endblock%}

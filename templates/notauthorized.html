@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+没有授权！
+{% endblock title %}
+{% block style %}
+    <link href='{% static 'css/notauth.css' %}' type='text/css' rel='stylesheet'/>
+{% endblock style %}
+{% block content %}
+<h1>未授权</h1>
+<img src="{% static 'imgs/no-authentication.png' %}"/>
+{% endblock content %}

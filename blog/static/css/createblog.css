@@ -1,0 +1,74 @@
+#page-title{
+  height: 100px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+#page-title>div:nth-child(2){
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+#page-title>div:nth-child(2)>div{
+  margin: 0 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 2px;
+  border-radius: 5px;
+}
+#page-title>div:nth-child(2)>div:hover{
+  background-color: #eee;
+  cursor: pointer;
+}
+#page-title>div:nth-child(2)>div img{
+  width:20px
+}
+#blog-title input{
+  border:none;
+  padding: 10px;
+  font-size: 1rem;
+  border-block-end: solid 3px #bbb;
+  width: 300px
+}
+#create-new-blog{
+  width:100%
+}
+#react-render-markdown-editor{
+  width:100%;
+  height: calc(100% - 100px);
+  display: flex;
+  justify-content: space-between;
+}
+#markdown-editor-container{
+  width: 50%;
+  height: 100%;
+  box-sizing: border-box;
+}
+#markdown-preview-container{
+  width: 50%;
+  height: 100%;
+  box-sizing: border-box
+}
+#markdown-editor{
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  height: 100%;
+  border: none;
+  background-color: aliceblue;
+  font-size: 1.1rem;
+  padding: 10px
+}
+#markdown-preview{
+  width:100%;
+  box-sizing: border-box;
+  height: 100%;
+  overflow: scroll;
+  font-size: .9em;
+  padding: 10px;
+  line-height: 1.5rem
+}
+#markdown-preview img{
+  width:100%
+}

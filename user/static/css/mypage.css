@@ -1,0 +1,200 @@
+#user-avatar{
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
+}
+#mypage-body{
+  display: flex;
+  justify-content: flex-start;
+}
+#dashboard{
+  width: 250px;
+  box-sizing: border-box;
+  position: absolute;
+  height:100%;
+  padding: 10px;
+  border-right: solid 2px #d81e06;
+}
+#content{
+  position: absolute;
+  width: calc(100% - 250px);
+  height: 100%;
+  margin:0 0  0 250px;
+  box-sizing: border-box;
+  padding: 10px;
+  background-color: #eee;
+}
+#content #nav{
+  display: flex;
+  justify-content: flex-start;
+}
+#content #nav .nav-item{
+  margin:4px;
+  background-color: white;
+  width:100px;
+  text-align: center;
+  
+}
+#content #nav .nav-item a{
+  text-decoration: none;
+  display: block;
+}
+#content #nav .nav-item img.nav-icon{
+  width: 30px;
+}
+#sex-img img{
+  width:20px
+}
+#lan-tag{
+  padding: 5px;
+}
+#lan-tag span{
+  display: inline-block;
+  background-color: #d87265;
+  border-radius: 3px;
+  padding: 2px;
+  margin: 3px;
+  color:white
+}
+
+#user-profile>div:first-child{
+  display: flex;
+  justify-content: space-around;
+  align-items: center
+}
+#edit #create-new-blog, #logout{
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  background: #eee;
+  padding:10px;
+  border-radius:5px;
+  font-size: .4rem;
+}
+#edit #create-new-blog a{
+  text-decoration: none;
+}
+#edit #create-new-blog:hover,#logout:hover{
+  background: #ddd;
+}
+#edit #create-new-blog img,#logout img{
+  width: 30px;
+  display:block;
+  margin:auto
+}
+#hot-blog img,#not-pub-blog img{
+  width: 20px
+}
+#my-blog-list{
+  background-color: #eee
+}
+#more-my-pub-button{
+  color:#d81e06;
+  display: inline-block;
+  border-radius: 3px;
+  padding: 2px;
+}
+#more-my-pub-button:hover{
+  background-color: #eee;
+  cursor: pointer;
+}
+#my-blog-list-not-pub{
+  background-color: #eee
+}
+a.blog-list-item{
+  display: block;
+  border-block-end: dotted 1px #111;
+  width:100%;
+  text-overflow: ellipsis;
+
+}
+.blog-list-item:hover{
+  color:#d81e06;
+  cursor: pointer;
+}
+#msg-not-read-entery{
+  position: relative;
+  margin: 20px;
+  text-align: center;
+  border:solid 1px #d81e06;
+  border-radius: 4px;
+}
+#msg-not-read-entery:hover{
+  background-color: #eee;
+  cursor: pointer;
+  
+}
+#msg-not-read-entery #badge-msg-num{
+  position: absolute;
+  top:-10px;
+  right: -10px;
+  background-color: #d81e06;
+  width:25px;
+  height: 25px;
+  border-radius: 25px;
+  text-align: center;
+  color:white
+}
+#content>div>div:first-child{
+  height: 120px
+}
+#all-pub-blogs-list, #msg-not-read-details-list{
+  width:97%;
+  padding: 10px;
+  margin: auto;
+  background-color: white;
+  max-height:calc(100% - 140px);
+  overflow: scroll;
+}
+#all-pub-blogs-list .complex-blog-list-item{
+  text-decoration: none;
+  display: block;
+  padding: 10px 0;
+  border-block-end: dotted 1px #aaa;
+  color:black
+}
+#all-pub-blogs-list .complex-blog-list-item:hover{
+  color:#d81e06
+}
+#all-pub-blogs-list .complex-blog-list-item:last-child{
+  border:none;
+}
+#all-pub-blogs-list .complex-blog-list-item .last-modify{
+  display: inline-block;
+  font-size: .4rem;
+  color:#aaa
+}
+#all-pub-blogs-list .complex-blog-list-item .last-modify::before{
+  content: ' > 上次修改 ';
+  width: 100px;
+}
+#all-pub-blogs-list .complex-blog-list-item .part-content-and-img{
+  display: flex;
+  justify-content: space-between;
+}
+#all-pub-blogs-list .complex-blog-list-item .blog-first-img{
+  width:200px
+}
+#msg-not-read-details-list .msg-item img{
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+}
+#msg-not-read-details-list .msg-item .msg-head{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+#msg-not-read-details-list .msg-item .msg-head .sender-name{
+  margin: 0 10px;
+}
+#msg-not-read-details-list .msg-item .msg-head .send-time{
+  color: #aaa;
+  font-size: .7rem
+}
+#msg-not-read-details-list .msg-item .msg-content{
+  margin: 10px
+}
+#msg-not-read-details-list .msg-item .msg-source-blog{
+  color:#d87265
+}

@@ -1,0 +1,127 @@
+body{
+  background-color: #eee;
+  font-size: 13px
+}
+
+#home-body{
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 80%
+}
+#left-nav{
+  flex:1;
+  margin:10px;
+  background-color: white;
+  padding: 10px
+}
+#blog-list{
+  flex:3;
+  margin:10px;
+  background-color: white;
+  padding: 20px;
+  height: 100%;
+}
+#blog-list>div{
+  height: 100%;
+  overflow: scroll;
+}
+.blog-item{
+  border-bottom: dotted 1px #aaa;
+  padding:10px;
+  display: block;
+  text-decoration: none;
+  color:black
+}
+.blog-item .header{
+  display: flex;
+  justify-content: flex-start
+}
+.blog-item .content{
+  font-size: .9rem
+}
+.author-name{
+  font-size: .8rem
+}
+.blog-last-modified{
+  color: #aaa;
+  font-size: .6rem
+}
+.blog-item .header>div{
+
+}
+.blog-item .content-img{
+  display: flex;
+  justify-content: space-between
+}
+.blog-item .blog-img{
+  width: 200px;
+  height: 150px;
+  overflow: hidden;
+}
+.author-avatar{
+  width: 40px;
+  height: 40px;
+  border-radius: 40px
+}
+#paginator{
+  display: flex;
+  justify-content: center;
+}
+#paginator>div{
+  margin:10px 20px;
+  border:solid 1px #d81e06;
+  border-radius: 3px;
+  padding: 3px;
+}
+#paginator>div:hover{
+  background-color: #eee;
+  cursor: pointer;
+}
+#left-nav #home-nav  #user-info img{
+  width:40px;
+  height:40px;
+  border-radius: 40px
+}
+#left-nav #home-nav  #user-info img#sex-icon{
+  width:20px;
+  height: 20px;
+}
+#to-my-page{
+  display: block;
+  text-decoration: none;
+  background-color: #e66b5b;
+  color:white;
+  padding: 2px;
+  margin-left: 30px;
+  border-radius: 4px;
+}
+#to-my-page:hover{
+  background-color: #d81e06;
+  cursor: pointer;
+}
+.logout-icon{
+  width: 10px;
+  height: 10px;
+}
+.logout-icon:hover{
+  border: solid 1px #e66b5b
+}
+#left-nav #home-nav  #user-info{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+#left-nav #home-nav #buttons{
+  display: flex;
+  justify-content: flex-start;
+  margin:20px 10px
+}
+#left-nav #home-nav .button{
+  display: inline-block;
+  margin:4px 5px;
+  border: solid 1px #d81e06;
+  border-radius: 3px;
+  padding: 2px;
+  text-decoration: none;
+}

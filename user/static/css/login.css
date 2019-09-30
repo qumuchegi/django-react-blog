@@ -1,0 +1,37 @@
+h1{
+  text-align: center;
+}
+#login-form-container{
+  margin:auto
+}
+table{
+  margin:auto
+}
+.field-item{
+  padding: 50px;
+}
+.field-item .tag{
+  width: 200px;
+  text-align: right;
+}
+.field-item .input{
+  width: 200px
+}
+#buttons{
+  width:300px;
+  margin: 30px auto;
+}
+#login-submit{
+  width:150px;
+  display: block;
+  margin: auto;
+  font-size: 1.2rem;
+}
+#buttons a{
+  display: block;
+  width:150px;
+  margin:auto;
+  text-align: center;
+  font-size: 1.2rem;
+  text-decoration: none;
+}

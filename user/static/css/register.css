@@ -1,0 +1,39 @@
+h1{
+  text-align: center
+}
+#register-form-container{
+  width:600px;
+  margin:auto;
+  padding: 20px;
+  border-radius: 5px;
+}
+#register-form-table{
+  width:500;
+  margin: auto
+}
+
+.field-item .tag{
+  width: 200px;
+  text-align: right;
+}
+.field-item .input{
+  width: 200px
+}
+#buttons{
+  width:300px;
+  margin: 30px auto;
+}
+#register-submit{
+  width:150px;
+  display: block;
+  margin: auto;
+  font-size: 1.2rem;
+}
+#buttons a{
+  display: block;
+  width:150px;
+  margin:auto;
+  text-align: center;
+  font-size: 1.2rem;
+  text-decoration: none;
+}

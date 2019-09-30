@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  用户注册
+{% endblock%}
+{% block style %}
+<link href='{% static 'css/register.css' %}' type='text/css' rel='stylesheet'/>
+{% endblock style %}
+{% block content %}
+  <h1>注册</h1>
+  <div id='register-form-container'>
+    <form action='' method='POST' enctype="multipart/form-data">
+      {% csrf_token %}
+      <table id='register-form-table'>
+        {% for field in  register_form%}
+        <tr class='field-item'>
+          <td class="tag">{{ field.label_tag }} </td>
+          <td class="input" >{{ field }}</td>
+          <td>{{ field.errors }}</td>
+        </tr>
+        {% endfor %}
+        <tr class='field-item'>
+          <td class="tag">编程语言:</td>
+          <td class="input" >
+            {% for lan in program_lans   %}
+              <span>
+                <input type="checkbox" id="{{lan}}" name="{{lan}}" value="{{lan}}">
+                <label for="{{lan}}">{{lan}}</label>
+              </span>
+            {% endfor %}
+          </td>
+        </tr>
+      </table>
+      <div id='buttons'>
+        <input type='submit' value='提交注册' id='register-submit'>
+        <a href="{% url 'user:login' %}">去登录</a>
+      </div>
+    </form>
+  </div>
+{% endblock%}

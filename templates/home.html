@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+博客首页
+{% endblock title %}
+{% block style %}
+  <link href='{% static 'css/home.css' %}' type='text/css' rel='stylesheet'/>
+{% endblock style %}
+{% block content %}
+<div id='home-body'>
+  <div id="left-nav">
+  
+  </div>
+  <div id='blog-list'>
+    
+  </div>
+</div>
+{% endblock content %}
+{% block javascript %}
+  <script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
+  <script src='{% static 'js/api.js' %}' type="text/javascript" defer></script>
+  <script src='{% static 'js/home/index.js' %}' type="text/javascript" defer></script>
+{% endblock javascript %}

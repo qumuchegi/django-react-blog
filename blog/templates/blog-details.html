@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block style %}
+  <link href='{% static 'css/blogdetails.css' %}' type='text/css' rel='stylesheet'/>
+  <link href='{% static 'css/markdownrendered.css' %}' type='text/css' rel='stylesheet'/>
+{% endblock style %}
+{% block title %}
+博客详情
+{% endblock title %}
+{% block content %}
+  <div id='blog-details-body'>
+    <div id='blog-header'></div>
+    <div id='blog-content'></div>
+    <div id='comment'>
+      <h2>评论</h2>
+      <div id="comments-list"></div>
+      <div>
+        <textarea placeholder="请您发炎" id="comment-input"></textarea>
+        <div onclick="sendComment()" id='send-comment-button'>发送</div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+{% block javascript %}
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.bootcss.com/marked/0.7.0/marked.js"></script>
+  <script src="https://cdn.bootcss.com/highlight.js/9.15.10/highlight.min.js"></script>
+  <script src='{% static 'js/api.js' %}' type="text/javascript"></script>
+  <script src='{% static 'js/blogdetails.js' %}' type="text/javascript"></script>
+{% endblock javascript %}
