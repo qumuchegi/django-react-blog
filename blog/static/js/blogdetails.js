@@ -9,7 +9,6 @@ var readerid , blogownerid
 
 function readCookies(){
   let cookie = document.cookie
-  console.log('cookie:', cookie)
 
   let items = cookie.split(';')
   let cookiesArr = items.length>1 && items.map(
@@ -19,7 +18,6 @@ function readCookies(){
     }
   )
 
-  console.log('cookies:', cookiesArr)
   return cookiesArr
 }
 
@@ -97,8 +95,8 @@ function renderComments(comments){
     constructor(props){
       super(props)
       this.state={
-        comment_id_replying : null // 正在被回复的评论的ID
-
+        comment_id_replying : null, // 正在被回复的评论的ID
+        reply_id_replying: null // 正在被回复的回复的ID
       }
     }
 
@@ -108,20 +106,33 @@ function renderComments(comments){
       )
     }
 
+    onClickReply(reply_id){
+      this.setState(
+        (prevState)=>prevState.reply_id_replying ? ({reply_id_replying: null}):({reply_id_replying: reply_id})
+      )
+    }
 
-    async starComment(commentid){
+    async starComment(commentid, comment_owner_id){
         let res = await api_post('/star/givestar',{
-          star_from_userId: readerid,
+          star_from_userid: readerid,
+          star_to_userid: comment_owner_id,
           star_for_type: 'comment',
           star_for_id: commentid
         })
         if(res.code===0){
           alert('点赞成功')
+        }else if(res.code===1){
+          alert('您已经赞过了！')
         }
     }
 
-    async sendReply(receiver_id,comment_id){
-      let reply_content = document.getElementById(`reply-input-${comment_id}`).value
+    async sendReply(receiver_id,comment_id,reply_id=''){
+      let reply_content 
+      if(!reply_id){
+        reply_content = document.getElementById(`reply-input-${comment_id}`).value
+      }else if(reply_id){
+        reply_content = document.getElementById(`reply-to-reply-input-${reply_id}`).value
+      }
       console.log('回复内容：', reply_content)
       if(!reply_content){
         return alert('请输入回复内容！')
@@ -176,11 +187,15 @@ function renderComments(comments){
           let footer = cele(
             'div',{className: 'footer'},
             cele('div',{className:'icon'},
-              cele('img',
-               {
-                 src: baseUrl+'/static/imgs/love-1.png',
-                 onClick:()=>this.starComment(comment.comment_id)
-               }),
+              cele(
+                'div',null,
+                cele('img',
+                {
+                  src: baseUrl+'/static/imgs/love-1.png',
+                  onClick:()=>this.starComment(comment.comment_id, comment.owner_id)
+                }),
+               cele('div',{className: 'star-num'}, comment.star_num),
+              ),
               cele('img',{src: baseUrl+'/static/imgs/comment.png',onClick:()=>this.onClickComment(comment.comment_id)})
             ),
             cele(
@@ -211,24 +226,69 @@ function renderComments(comments){
             comment.comment_reply.map(reply=>
               cele(
                 'div',{className: 'reply-item'},
-                 cele(
-                   'div',{className:'reply-from-user'},
-                   cele(
-                     'img',{className:'avatar',src: baseUrl+reply.reply_from_user_avatar.replace('user','')}
-                   ),
-                   cele(
-                     'div',{className:'name-time'},
-                     cele(
-                       'div',null,reply.reply_from_user_name
-                     ),
-                     cele(
+                cele('div',{className:'reply-header'},
+                  cele(
+                    'div',{className:'reply-from-user'},
+                    cele(
+                      'img',{className:'avatar',src: baseUrl+reply.reply_from_user_avatar.replace('user','')}
+                    ),
+                    cele(
+                      'div',{className:'name-time'},
+                      cele(
+                        'div',null,reply.reply_from_user_name
+                      ),
+                      cele(
                       'div',null,reply.reply_time
                     )
-                   )
-                 ),
+                    )
+                  ),
+                  cele('img',{className:'reply-direction',src: baseUrl+'/static/imgs/arrow-right.png'}),
+                  cele(
+                    'div',{className:'reply-to-user'},
+                    cele(
+                      'img',{className:'avatar',src: baseUrl+reply.reply_to_user_avatar.replace('user','')}
+                    ),
+                    cele(
+                      'div',{className:'name-time'},
+                      cele(
+                        'div',null,reply.reply_to_user_name
+                      )
+                    )
+                  ),
+                
+                ),
+                 
                  cele(
                    'div',{className:'reply-content'},reply.reply_content
-                 )
+                 ),
+                 cele(
+                   'div',{className: 'reply-reply'},
+                   cele('img',{src: baseUrl+'/static/imgs/reply.png',onClick:()=>this.onClickReply(reply.reply_id)}),
+                   cele(
+                    'div',
+                    {
+                      className:'reply-to-reply-input-container',
+                      id: this.state.reply_id_replying === reply.reply_id ? 'reply-to-reply-input-show':'reply-to-reply-input-hide'
+                    },
+                    cele(
+                      'input',
+                      {
+                        type:'text',
+                        placeholder: '尽情发炎吧',
+                        id:`reply-to-reply-input-${reply.reply_id}`,
+                        className:'reply-to-reply-input'
+                      },
+                    ),
+                    cele(
+                      'div',
+                      {
+                        className:'send-reply-to-reply-button',
+                        onClick:()=>this.sendReply(reply.reply_from_user_id, comment.comment_id,reply.reply_id)
+                      },
+                      '发送'
+                    )
+                  )
+                 ),
               )
            )
           )
@@ -258,7 +318,6 @@ window.onload = function(){
   var qs_arr = window.location.search.split('&')
   blogid = qs_arr[0].split('=')[1]
   blogownerid = qs_arr[1].split('=')[1]
-  //readerid = qs_arr[2].split('=')[1]
   let cookiesArr = readCookies()
   if(cookiesArr){
     readerid =  cookiesArr.filter(cookie => cookie.key.trim()==='logined_user_userid')[0].value

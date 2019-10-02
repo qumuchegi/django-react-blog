@@ -40,3 +40,25 @@ def postComment(request):
     })
   
   return JsonResponse({'code':0})
+
+def getMyComments(request):
+  userid = request.GET['userid']
+  comments = Comment.objects.filter(comment_owner_id=userid)
+  comments_rewrite = []
+  user = User.objects.get(user_id=userid)
+  user = {
+    'avatar': user.avatar_url.url.replace('user/static/','')
+  }
+  for comment in comments:
+    comment_blog_id = comment.comment_blog_id.blog_id
+    comment_blog_title = comment.comment_blog_id.blog_title
+    comment_blog_author_id =  comment.comment_blog_id.author_id.user_id
+    comment_time = comment.created_time
+    comment_content = comment.comment_content
+    comments_rewrite.append({
+      'comment_blog_title': comment_blog_title,
+      'comment_time': comment_time,
+      'comment_content': comment_content,
+      'comment_blog_url': '127:0.0.0.0:8000/blog/blogdetails?blogid='+ str(comment_blog_id)+'&userid='+str(comment_blog_author_id),
+    })
+  return render(request, 'mycomments.html',{'comments': comments_rewrite, 'user': user})

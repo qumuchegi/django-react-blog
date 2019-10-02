@@ -8,6 +8,12 @@
 创建博客
 {% endblock title %}
 {% block content %}
+  <div id="img-upload-hide" class='hide-img-container'>
+
+  </div>
+  <div id='img-upload-success' class='hide-img-success'>
+  
+  </div>
   <div id='create-new-blog'>
     <div id='page-title'>
        <h2>编辑博客</h2>
@@ -21,8 +27,11 @@
          <img src='{% static 'imgs/save.png' %}'/>
         </div>
         <div onclick='uploadImg()'>
-          上传图片
-          <img src='{% static 'imgs/img.png' %}'/>
+          <label for='img-upload'>
+            上传图片
+            <img src='{% static 'imgs/img.png' %}'/>
+          </label>
+          <input id="img-upload" type="file" onchange="onImgUploadInputChange()"/>
          </div>
        </div>
        <div id='blog-title'>
@@ -31,6 +40,9 @@
        {% else %}
          <input type="text" placeholder="输入博客标题 ..." id="blog-title-input"/>
        {% endif %}
+       </div>
+       <div id='choice-blog-tags'>
+       
        </div>
     </div>
     <div id='react-render-markdown-editor'>

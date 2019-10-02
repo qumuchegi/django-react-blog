@@ -139,9 +139,8 @@ a.blog-list-item{
   height: 120px
 }
 #all-pub-blogs-list, #msg-not-read-details-list{
-  width:97%;
+  width:60%;
   padding: 10px;
-  margin: auto;
   background-color: white;
   max-height:calc(100% - 140px);
   overflow: scroll;
@@ -173,7 +172,8 @@ a.blog-list-item{
   justify-content: space-between;
 }
 #all-pub-blogs-list .complex-blog-list-item .blog-first-img{
-  width:200px
+  width:150px;
+  height:100px
 }
 #msg-not-read-details-list .msg-item img{
   width: 30px;

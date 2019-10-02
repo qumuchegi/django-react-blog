@@ -7,7 +7,8 @@ class Star(models.Model):
   赞是对博客、评论的赞
   '''
   star_id = models.AutoField(verbose_name='赞ID', primary_key=True)
-  star_from_userid = models.ForeignKey('user.User',verbose_name='赞的发送者ID',on_delete=models.CASCADE,null=True,related_name='zan_from')
+  star_from_userid = models.ForeignKey('user.User',verbose_name='赞的发送者ID',on_delete=models.CASCADE,null=True,related_name='star_from')
+  star_to_userid = models.ForeignKey('user.User',verbose_name='赞的接受者ID',on_delete=models.CASCADE,null=True,related_name='star_to')
   '''
   如果赞是给博客的：
   '''

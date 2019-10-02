@@ -5,4 +5,5 @@ from . import views
 app_name='star'
 urlpatterns = [
     path('givestar',views.giveStar),
+    path('mystars/<str:star_direction>', views.getMyStarToOthers),
 ]

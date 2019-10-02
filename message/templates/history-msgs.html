@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+历史消息
+{% endblock title %}
+{% block style %}
+  <link href='{% static 'css/history-msgs.css' %}' type='text/css' rel='stylesheet'/>
+{% endblock style %}
+{% block content %}
+    <div id="history-msg-body">
+      <div id="header">
+        <img src="{% static receiver.user_avatar %}"></img>
+        <h3>我的历史消息</h3>
+      </div>
+      <div id='msg-list'>
+        {% for msg in  msgs%}
+          <div class='msg-item'>
+            {% if not msg.had_read %}
+             <div class='not-read'>
+                新
+             </div>
+            {% endif %}
+            <div class='msg-sender'>
+              <img src="{% static msg.sender_avatar %}"></img>
+              <div class='sender-name-time'>
+                <div class='name'>{{msg.sender_name}}</div>
+                <div class='time'>{{msg.send_time}}</div>
+              </div>
+            </div>
+            <div class="msg-content">
+              {{msg.msg_content}}
+            </div>
+            <div class="source-blog">
+              <a href={{msg.source_blog_url}} class='blog-url'>
+              {{msg.source_blog_title}}
+              </a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+{% endblock content %}
+{% block javascript %}
+<script src="{% static 'js/history-msgs.js' %}" type='text/javascript' defer></script>
+{% endblock javascript %}

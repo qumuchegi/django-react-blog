@@ -26,7 +26,8 @@ def add_authorInfo_to_blog(blog):
     'author_avatar': blog.author_id.avatar_url.url.replace('user/static/',''),
     'blog_last_modified': blog.last_modified,
     'blog_content': blog.blog_content,
-    'blog_title': blog.blog_title
+    'blog_title': blog.blog_title,
+    'blog_tags': blog.blog_tags
   }
 
 def getBlogCommentReply(commentid):
@@ -38,13 +39,18 @@ def getBlogCommentReply(commentid):
     msgs_json = []
     for msg in msgs:
       from_user =  json.loads(serialize('json',[msg.sender_id]))[0]
+      to_user = json.loads(serialize('json',[msg.receiver_id]))[0]
 
       msgs_json.append({
+          'reply_id': msg.message_id,
           'reply_to_comment_id': commentid,
           'reply_content': msg.content,
           'reply_from_user_id': msg.sender_id.pk,
           'reply_from_user_avatar': from_user['fields']['avatar_url'],
           'reply_from_user_name': from_user['fields']['username'],
+          'reply_to_user_id': msg.receiver_id.pk,
+          'reply_to_user_name': to_user['fields']['username'],
+          'reply_to_user_avatar': to_user['fields']['avatar_url'],
           'reply_time': msg.send_time
         })
     return msgs_json

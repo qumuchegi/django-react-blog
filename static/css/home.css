@@ -13,7 +13,7 @@ body{
   flex:1;
   margin:10px;
   background-color: white;
-  padding: 10px
+  padding: 0px
 }
 #blog-list{
   flex:3;
@@ -54,10 +54,10 @@ body{
   display: flex;
   justify-content: space-between
 }
-.blog-item .blog-img{
+.blog-item .content-img img.blog-img{
   width: 200px;
-  height: 150px;
-  overflow: hidden;
+  height: 100px;
+  display: block;
 }
 .author-avatar{
   width: 40px;
@@ -77,6 +77,9 @@ body{
 #paginator>div:hover{
   background-color: #eee;
   cursor: pointer;
+}
+#left-nav #home-nav  #user-info {
+  padding: 10px
 }
 #left-nav #home-nav  #user-info img{
   width:40px;
@@ -124,4 +127,39 @@ body{
   border-radius: 3px;
   padding: 2px;
   text-decoration: none;
+}
+.blog-item .tags{
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap
+}
+.blog-item .tags .tag{
+  display: block;
+  padding: 2px;
+  border-radius: 2px;
+  border:solid 1px #d81e06;
+  margin:1px 3px;
+}
+.blog-tags{
+  background-color: #eee;
+  border-top:solid 14px #eee;
+  padding: 5px;
+  display: flex;
+  justify-content: flex-start
+}
+.blog-tags .tag-item{
+  border-radius: 1px;
+  padding: 6px;
+  margin: 3px;
+  background-color: white
+}
+.blog-tags .tag-item:hover{
+  color: #d81e06;
+  cursor: pointer;
+}
+#not-logined{
+  padding: 20px;
+}
+#not-logined a{
+  text-decoration: none
 }

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+我的评论
+{% endblock title %}
+{% block style %}
+  <link href='{% static 'css/mycomments.css' %}' type='text/css' rel='stylesheet'/>
+{% endblock style %}
+{% block content %}
+  <div id='mystars-body'>
+    <div id="header">
+      <img src="{% static user.avatar %}"/>
+      <h3>我的评论</h3>
+    </div>
+    <div id='comments-list'>
+     {% if comments %}
+      {% for comment in comments %}
+        <div class='comment-item'>
+          <div class="header">
+            你对博客
+            <a class="blog-url" href={{comment.comment_blog_url}}>
+              {{comment.comment_blog_title}}
+            </a>
+            的评论：
+          </div>
+          <div class='comment-content'>
+            {{comment.comment_content}}
+          </div>
+        </div>
+      {% endfor %}
+      {% else %}
+      <k1>您还没有任何评论</h1>
+      {% endif %}
+    </div>
+  </div>
+{% endblock content %}
+{% block javascript %}
+<script src="{% static 'js/mycomment.js' %}" type='text/javascript' defer></script>
+{% endblock javascript %}

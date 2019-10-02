@@ -7,5 +7,7 @@ urlpatterns = [
     path('createblog',views.createblog,name='createblog'),
     path('createblog/<int:blogid>',views.createblog,name='modifyblog'),
     path('blogdetails',views.getblog,name="blogdetails"),
-    path('blogcomments/',views.getBlogComment)
+    path('blogcomments/',views.getBlogComment),
+    path('uploadimg',views.postimg),
+    path('alltags/',views.getBlogAllTags)
 ]

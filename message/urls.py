@@ -7,5 +7,6 @@ urlpatterns=[
   path('',views.postMessage),
   path('readmsg/',views.readMsg),
   path('readmanymsgs',views.readManyMsgs),
-  path('msgnotread/',views.getNotReadMsg)
+  path('msgnotread/',views.getNotReadMsg),
+  path('historymsgs/',views.getMyHistoryMsgs)
 ]

@@ -6,7 +6,6 @@ var apiGet = api_get, apiPost = api_post // api.js封装
 
 function readCookies(){
   let cookie = document.cookie
-  console.log('cookie:', cookie)
 
   let items = cookie.split(';')
   let cookiesArr = items.length>1 && items.map(
@@ -16,7 +15,6 @@ function readCookies(){
     }
   )
 
-  console.log('cookies:', cookiesArr)
   return cookiesArr
 }
 
@@ -26,6 +24,7 @@ class LeftNav extends ReactCom{
     this.state={
       userid:'',
       logined_user_info:'',
+      tags:[]
     }
   }
   componentDidMount(){
@@ -34,10 +33,11 @@ class LeftNav extends ReactCom{
 
    if(cookieArr){
       let userid = cookieArr.filter(cookie => cookie.key.trim()==='logined_user_userid')[0].value//
-      console.log('已经登录的用户的ID：', userid)
       this.setState({userid})
       this.featchUserInfo(userid)
       .then(userinfo=>this.setState({logined_user_info: userinfo}))
+
+      this.featchAlltags()
    }
   }
 
@@ -46,6 +46,14 @@ class LeftNav extends ReactCom{
     if(res.code===0){
       console.log('userinfo:', res.user)
       return res.user
+    }
+  }
+
+  async featchAlltags(){
+    let res = await api_get('/blog/alltags')
+    if(res.code===0){
+      console.log('tags', res.tags)
+      this.setState({tags: res.tags})
     }
   }
 
@@ -106,12 +114,21 @@ class LeftNav extends ReactCom{
             )
           )
        ),
-       
+       cele(
+         'div',{className: 'blog-tags'},
+         this.state.tags.map(
+           tag=>
+            cele(
+              'div',{className: 'tag-item'},
+              tag
+            )
+         )
+       )
     )
     let not_logined = cele(
       'div',{id:'not-logined'},
       cele(
-        'a',{href: baseUrl+'/user/login'},'去登录'
+        'a',{href: baseUrl+'/user/login'},'您还没有登录，去登录'
       )
     )
     return(
@@ -137,11 +154,10 @@ class Bloglist extends ReactCom{
       this.setState({userid})
     }
     this.featchAllPubBlogs(this.state.pageNum)
+
   }
   
   async featchAllPubBlogs(pageNum){
-    console.log('pageNum:', pageNum)
-
     let res = await  apiGet('/allpubblogs',{pageNum})
     if(res.code===0){
       console.log('blogs:', res.blogs)
@@ -194,6 +210,12 @@ class Bloglist extends ReactCom{
       cele('div',{className: 'content-img'}, 
         cele(
           'div',{className:'content'},blog.blog_content.slice(0,60),
+          cele(
+            'div',{className: 'tags'},
+            blog.blog_tags.split('/').map(
+              tag=>cele('span',{className:'tag'},tag)
+            )
+          )
         ),
         matchImgFromMarkdown(blog.blog_content) && cele(
           'img',{className:'blog-img',src: matchImgFromMarkdown(blog.blog_content)}

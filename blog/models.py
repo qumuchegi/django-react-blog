@@ -9,6 +9,7 @@ class Blog(models.Model):
   created_time = models.DateTimeField(verbose_name='博客创建时间')
   last_modified = models.DateTimeField(verbose_name='博客最后修改时间')
   is_publish = models.BooleanField(verbose_name='是否已经发布还是暂存(默认发布)',default=True)
+  blog_tags = models.TextField(verbose_name='文章标签（以 / 隔开）',default='javascript')
 
   def __str__(self):
     return f'{self.blog_title}{self.blog_id}'

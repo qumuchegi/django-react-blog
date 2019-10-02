@@ -1,5 +1,6 @@
 baseUrl = 'http://127.0.0.1:8000'
 var apiGet = api_get, apiPost = api_post
+var userid // 当前登录用户的id
 var cele = React.createElement
 var Rrender = ReactDOM.render
 var ReactCom = React.Component
@@ -40,17 +41,6 @@ async function readSignalMsg(msg_id){// 读单条未读消息
   let res = await api_post('/message/readmsg',{msg_id})
   if(res.code===0){
     console.log('消息已读')
-  }
-}
-
-function logout(){
-  console.log('清除 cookie', '')
-  delCookie('logined_user_userid')
-  delCookie('jwt_token')
-  //document.getElementById('logout').href='/'
-
-  function delCookie(name) {
-    document.cookie = name + '=;  expires=Thu, 01 Jan 1970 00:00:01 GMT;'
   }
 }
 
@@ -107,9 +97,9 @@ function componentShowMsgNotReadToContent(msgs){
           'a',
           {
             className:'msg-source-blog',
-            href: baseUrl+`/blog/blogdetails?blogid=${msg.source_blog.pk}&userid=${msg.source_blog.fields.author_id}`,
+            href: baseUrl+`/blog/blogdetails?blogid=${msg.source_blog_id}&userid=${msg.source_blog_author_id}`,
           },
-           `查看原博客： ${msg.source_blog.fields.blog_title}`
+           `查看原博客： ${msg.source_blog_title}`
         ) 
       )
     )
@@ -130,17 +120,19 @@ function renderContentArea(renderType, warped_contentComponent){ // 根据条件
     constructor(props){
       super(props)
       this.state={
-        renderType
+        renderType,
+        userid:'',
       }
     }
     componentWillMount(){
-
+      userid = window.location.search.split('=')[1]
+      this.setState({userid})
     }
 
     render(){
       return(
         cele('div',null,
-          cele(contentHeader,{renderType: this.state.renderType}),
+          cele(contentHeader,{renderType: this.state.renderType, userid: this.state.userid}),
           cele(contentContent,{renderType: this.state.renderType})
         )
       )
@@ -153,16 +145,17 @@ function renderContentArea(renderType, warped_contentComponent){ // 根据条件
       this.state={
         navs:[
           {name:'首页',url:'/',icon:'/static/imgs/home.png'},
-          {name:'历史消息',url:'',icon:'/static/imgs/message.png'},
-          {name:'我的关注',url:'',icon:'/static/imgs/watch-2.png'},
-          {name:'我赞过的博客',url:'',icon:'/static/imgs/blog.png'},
-          {name:'谁赞了我',url:'',icon:'/static/imgs/people.png'},
-          {name:'我的评论',url:'',icon:'/static/imgs/comment.png'}
+          {name:'历史消息',url: baseUrl+'/message/historymsgs?userid='+this.props.userid,icon:'/static/imgs/message.png'},
+          {name:'我赞过的',url: baseUrl+'/star/mystars/to-others?userid='+this.props.userid,icon:'/static/imgs/blog.png'},
+          {name:'谁赞了我',url: baseUrl+'/star/mystars/to-me?userid='+this.props.userid,icon:'/static/imgs/people.png'},
+          {name:'我的评论',url: baseUrl+'/comment/mycomments?userid='+this.props.userid,icon:'/static/imgs/comment.png'}
         ]
       }
     }
 
-    componentWillMount(){
+    componentDidMount(){
+      
+      console.log('userid:', userid)
       console.log('渲染类型：', this.props.renderType)
     }
     render(){
@@ -268,7 +261,8 @@ function showMorePubBlog(){
 
 window.onload=()=>{
   renderContentArea(renderContentType.DEFAULT)
-  let userid = window.location.search.split('=')[1]
+  userid = window.location.search.split('=')[1]
+ 
   featchMyMsgNotRead(userid)
 
   featchMyBlogs(userid)

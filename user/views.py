@@ -101,8 +101,8 @@ def login(request):
          jwt_token = generate_JWT_token(payload)
          print('jwt:',jwt_token)
          res = HttpResponseRedirect('/')
-         res.set_cookie('jwt_token', jwt_token, max_age=60*60*24,samesite='Strict',httponly=False)
-         res.set_cookie('logined_user_userid', user.user_id, max_age=60*60*24,samesite='Strict',httponly=False)
+         res.set_cookie('jwt_token', jwt_token, max_age=60*60*24)
+         res.set_cookie('logined_user_userid', user.user_id, max_age=60*60*24)
          return res
        else:
          return render(request,'err.html',{'err_type':'密码不正确','err_msg':'请重写输入密码'})

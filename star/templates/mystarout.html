@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+我赞过的
+{% endblock title %}
+{% block style %}
+  <link href='{% static 'css/mystarouted.css' %}' type='text/css' rel='stylesheet'/>
+{% endblock style %}
+{% block content %}
+  <div id='mystars-body'>
+    <div id="header">
+      <img src="{% static stars_from_user.avatar %}"/>
+      <h3>我赞过的</h3>
+    </div>
+    <div id='stars-list'>
+     {% if stars %}
+      {% for star in stars %}
+        {% if star.star_type == 'blog' %}
+          <div class='star-item'>
+            <div class="header">
+              你赞了
+              <span class='blog_author'>
+                {{star.star_for_blog_author_name}}
+              </span>
+              的博客：
+            </div>
+            <a class="blog-url" href={{star.star_for_blog_url}}>
+              {{star.star_for_blog_title}}
+            </a>
+          </div>
+        {% endif %}
+        {% if star.star_type == 'comment' %}
+          <div class='star-item'>
+            <div class="header">
+              你赞了
+              <span class='comment-owner'>
+                {{star.star_for_comment_owner_name}}
+              </span>
+              的评论：
+            </div>
+            来自博客：
+            <a class="blog-url" href={{star.star_for_blog_url}}>
+              {{star.star_for_blog_title}}
+            </a>
+          </div>
+        {% endif %}
+      {% endfor %}
+      {% else %}
+      <k1>您还没有赞过任何博客或者评论</h1>
+      {% endif %}
+    </div>
+  </div>
+{% endblock content %}
+{% block javascript %}
+<script src="{% static 'js/mystarouted.js' %}" type='text/javascript' defer></script>
+{% endblock javascript %}
