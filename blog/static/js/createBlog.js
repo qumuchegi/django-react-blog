@@ -101,9 +101,9 @@ window.onload=()=>{
     edit_mode_options = edit_mode_options.modify
     textarea.value = content_modified
     blogid_modified=window.location.pathname.split('/')[3]
-    console.log('path:', window.location.pathname.split('/')[3])
+    //console.log('path:', window.location.pathname.split('/')[3])
   }
-  console.log('修改模式下的待修改的内容', content_modified)
+  //console.log('修改模式下的待修改的内容', content_modified)
 
   Rrender(
     cele(BlogTagsChoice),document.getElementById('choice-blog-tags')

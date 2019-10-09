@@ -70,8 +70,8 @@ class LeftNav extends ReactCom{
   render(){
     let user = this.state.logined_user_info
     let buttons = [
-      {name:'消息',url:''},
-      {name:'写文章',url:'/blog/createblog'},
+      {name:'消息',url: '/message/historymsgs?userid='+this.state.userid},
+      {name:'写文章',url: '/blog/createblog'},
     ]
     let logined =  cele(
       'div',{id:'home-nav'},

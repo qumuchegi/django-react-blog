@@ -34,7 +34,7 @@ def createblog(request,blogid=''):#只有修改已有博客的时候才会有参
         blog = Blog.objects.get(blog_id=blogid)
         blog_title = blog.blog_title
         blog_content = blog.blog_content
-        blog_tags = blog.Blog_tags
+        blog_tags = blog.blog_tags
         return render(request,'create-new-blog.html',{'blog_title':blog_title, 'blog_content':blog_content,'blog_tags':blog_tags})
   elif request.method == 'POST':
     print('修改博客ID:',blogid)

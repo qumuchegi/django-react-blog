@@ -106,6 +106,7 @@ body{
 .logout-icon{
   width: 10px;
   height: 10px;
+  border: solid 1px white
 }
 .logout-icon:hover{
   border: solid 1px #e66b5b
